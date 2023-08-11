@@ -1,0 +1,185 @@
+node n2 {
+    type router
+    model PC
+    network-config {
+	hostname O5
+	!
+	interface eth0
+	 ip address 10.0.4.20/24
+	 ipv6 address 2001:4::20/64
+	!
+    }
+    canvas c1
+    iconcoords {114.0 126.0}
+    labelcoords {114.0 158.0}
+    interface-peer {eth0 n5}
+}
+
+node n3 {
+    type router
+    model PC
+    network-config {
+	hostname O6
+	!
+	interface eth0
+	 ip address 10.0.3.20/24
+	 ipv6 address 2001:3::20/64
+	!
+    }
+    canvas c1
+    iconcoords {113.0 343.0}
+    labelcoords {113.0 375.0}
+    interface-peer {eth0 n6}
+}
+
+node n4 {
+    type router
+    model router
+    network-config {
+	hostname O2
+	!
+	interface eth0
+	 ip address 10.0.0.1/24
+	 ipv6 address 2001:0::1/64
+	!
+	interface eth2
+	 ip address 10.0.2.1/24
+	 ipv6 address 2001:2::1/64
+	!
+	interface eth1
+	 ip address 10.0.1.1/24
+	 ipv6 address 2001:1::1/64
+	!
+    }
+    canvas c1
+    iconcoords {581.0 251.0}
+    labelcoords {581.0 283.0}
+    interface-peer {eth1 n5}
+    interface-peer {eth2 n6}
+    custom-image /usr/local/share/core/icons/normal/router_green.gif
+    interface-peer {eth0 n8}
+}
+
+node n5 {
+    type router
+    model router
+    network-config {
+	hostname O3
+	!
+	interface eth2
+	 ip address 10.0.5.1/24
+	 ipv6 address 2001:5::1/64
+	!
+	interface eth1
+	 ip address 10.0.4.1/24
+	 ipv6 address 2001:4::1/64
+	!
+	interface eth0
+	 ip address 10.0.1.2/24
+	 ipv6 address 2001:1::2/64
+	!
+    }
+    canvas c1
+    iconcoords {346.0 133.0}
+    labelcoords {346.0 165.0}
+    interface-peer {eth0 n4}
+    interface-peer {eth1 n2}
+    interface-peer {eth2 n6}
+    custom-image /usr/local/share/core/icons/normal/router_green.gif
+}
+
+node n6 {
+    type router
+    model router
+    network-config {
+	hostname O4
+	!
+	interface eth2
+	 ip address 10.0.5.2/24
+	 ipv6 address 2001:5::2/64
+	!
+	interface eth1
+	 ip address 10.0.3.1/24
+	 ipv6 address 2001:3::1/64
+	!
+	interface eth0
+	 ip address 10.0.2.2/24
+	 ipv6 address 2001:2::2/64
+	!
+    }
+    canvas c1
+    iconcoords {350.0 341.0}
+    labelcoords {343.0 379.0}
+    interface-peer {eth0 n4}
+    interface-peer {eth1 n3}
+    interface-peer {eth2 n5}
+    custom-image /usr/local/share/core/icons/normal/router_green.gif
+}
+
+node n8 {
+    type router
+    model host
+    network-config {
+	hostname O1
+	!
+	interface eth0
+	 ip address 10.0.0.10/24
+	 ipv6 address 2001:0::10/64
+	!
+    }
+    canvas c1
+    iconcoords {830.0 264.0}
+    labelcoords {830.0 296.0}
+    interface-peer {eth0 n4}
+}
+
+link l2 {
+    nodes {n4 n5}
+    bandwidth 0
+}
+
+link l3 {
+    nodes {n4 n6}
+    bandwidth 0
+}
+
+link l4 {
+    nodes {n6 n3}
+    bandwidth 0
+}
+
+link l5 {
+    nodes {n5 n2}
+    bandwidth 0
+}
+
+link l6 {
+    nodes {n5 n6}
+    bandwidth 0
+}
+
+link l1 {
+    nodes {n8 n4}
+    bandwidth 0
+}
+
+canvas c1 {
+    name {Canvas1}
+}
+
+option global {
+    interface_names no
+    ip_addresses yes
+    ipv6_addresses yes
+    node_labels yes
+    link_labels yes
+    show_api no
+    background_images no
+    annotations yes
+    grid yes
+    traffic_start 0
+}
+
+option session {
+}
+
